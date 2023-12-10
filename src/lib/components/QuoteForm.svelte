@@ -96,7 +96,6 @@
 
 	let toggleTag = (tag: string) => {
 		tags[tag] = !tags[tag];
-		console.log(Object.keys(tags).filter((key) => tags[key] == true));
 
 		// filters out to only tags that are true, save to localStorage
 		const preferTags = Object.keys(tags).filter((key) => tags[key] == true);
@@ -130,28 +129,23 @@
 </script>
 
 <Modal bind:showModal>
-	<h2 slot="header">modal</h2>
+	{#each Object.keys(tags) as tag}
+		<button
+			class="chip p-5 text-base text-slate-300 sm:text-lg {tags[tag]
+				? 'variant-filled'
+				: 'bg-slate-700'}"
+			on:click={() => {
+				toggleTag(tag);
+			}}
+			on:keypress
+		>
+			<!-- {#if tags[tag]}<span>(icon)</span>{/if} -->
+			<span class="capitalize">{tag}</span>
+		</button>
+	{/each}
 
-	<div class="grid gap-2 grid-cols-2 sm:grid-cols-4 md:grid-cols-5 bg-slate-800 rounded-md p-2">
-		{#each Object.keys(tags) as tag}
-			<button
-				class="chip p-5 text-base text-slate-300 sm:text-lg {tags[tag]
-					? 'variant-filled'
-					: 'bg-slate-700'}"
-				on:click={() => {
-					toggleTag(tag);
-				}}
-				on:keypress
-			>
-				<!-- {#if tags[tag]}<span>(icon)</span>{/if} -->
-				<span class="capitalize">{tag}</span>
-			</button>
-		{/each}
-	</div>
+	<button slot="reset" on:click={() => resetTags()} class="bg-slate-100 p-3 my-2 mx-1 rounded-lg">Reset</button>
 
-	<section class="flex justify-end">
-		<button on:click={() => resetTags()} class="p-5">Reset</button>
-	</section>
 </Modal>
 
 <div class="flex h-fit min-h-[12rem] sm:h-48 justify-between m-5 sm:m-10 rounded-lg bg-slate-800">

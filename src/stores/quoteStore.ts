@@ -59,8 +59,7 @@ export const generateQuote = async (preferTags:Array<string> = []) => {
 			preferTags.shift()
 		}
 	}
-	console.log("hi", tagsParam)
-	// tags=history|civil-rights
+	// example: tags=history|civil-rights
 
 	// generate quote
 	const data = await fetch('https://api.quotable.io/random?maxLength=150' + tagsParam)
