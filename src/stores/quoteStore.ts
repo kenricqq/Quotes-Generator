@@ -45,9 +45,25 @@ export const resetQuotes = () => {
 	localStorage.removeItem('quotes');
 };
 
-export const generateRandomQuote = async () => {
-	// generate random quote
-	const data = await fetch('https://api.quotable.io/random?maxLength=150')
+export const generateQuote = async (preferTags:Array<string> = []) => {
+	// change preferTags to string for api call
+	let tagsParam = ""
+	if (preferTags.length > 0) {
+		tagsParam += "&tags=" + preferTags[0]
+		preferTags.shift()
+		
+		if (preferTags.length > 0) {
+			preferTags.forEach((tag) => {
+				tagsParam += "|" + tag
+			})
+			preferTags.shift()
+		}
+	}
+	console.log("hi", tagsParam)
+	// tags=history|civil-rights
+
+	// generate quote
+	const data = await fetch('https://api.quotable.io/random?maxLength=150' + tagsParam)
 		.then((response) => response.json())
 		.catch((error) => {
 			console.log(`Error: ${error}`);
