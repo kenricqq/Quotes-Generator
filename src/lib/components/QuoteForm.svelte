@@ -144,11 +144,12 @@
 		</button>
 	{/each}
 
-	<button slot="reset" on:click={() => resetTags()} class="bg-slate-100 p-3 my-2 mx-1 rounded-lg">Reset</button>
-
+	<button slot="reset" on:click={() => resetTags()} class="bg-slate-100 p-3 my-2 mx-1 rounded-lg"
+		>Reset</button
+	>
 </Modal>
 
-<div class="flex h-fit min-h-[12rem] sm:h-48 justify-between m-5 sm:m-10 rounded-lg bg-slate-800">
+<div class="flex h-fit min-h-[13rem] justify-between m-5 sm:m-10 rounded-lg bg-slate-800">
 	<h1 class="p-9 pr-1 m-auto text-center text-xl sm:text-2xl">{$quote}</h1>
 
 	<section class="m-6 flex flex-col justify-between">
