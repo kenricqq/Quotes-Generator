@@ -9,7 +9,7 @@
 	export let quoteObj: Quote;
 </script>
 
-<blockquote class="flex flex-col sm:flex-row justify-between gap-3 m-2 p-5 text-lg bg-slate-800 rounded-md">
+<blockquote class="flex flex-col sm:flex-row justify-between gap-3 m-2 p-5 text-lg bg-slate-800 bg-opacity-70 rounded-md">
 	<!-- quote text -->
 	{quoteObj.quoteText}
 

@@ -13,7 +13,7 @@
 	});
 </script>
 
-<div class="container h-[100vh] flex flex-col p-3 pb-9 mx-auto max-w-4xl">
+<div class="container h-[0vh] flex flex-col p-3 pb-9 mx-auto max-w-4xl">
 	<!-- add quote to list -->
 	<div class="flex-shrink-0">
 		<QuoteForm />
@@ -21,7 +21,7 @@
 
 	<h2 class="text-xl p-3 underline decoration-4">Bookmarked Quotes</h2>
 
-	<section class="px-3 flex-grow overflow-y-auto">
+	<section class="px-3 flex-grow ">
 		{#each $quotes as quoteObj}
 			<!-- pass quote object to SavedQuote -->
 			<SavedQuote {quoteObj} />
