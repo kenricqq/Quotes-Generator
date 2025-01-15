@@ -205,8 +205,8 @@ export const setupThree = (canvas: HTMLCanvasElement) => {
 			// Animate camera
 			camera.position.y = (-scrollY / sizes.height) * 4
 
-			const parallaxX = cursor.x * 0.2
-			const parallaxY = -cursor.y * 0.2
+			const parallaxX = cursor.x * 0.5
+			const parallaxY = -cursor.y * 0.5
 			// cameraGroup.position.x = parallaxX * 0.5
 			// cameraGroup.position.y = parallaxY * 0.5
 			cameraGroup.position.x +=

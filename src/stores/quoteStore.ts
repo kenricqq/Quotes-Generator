@@ -62,14 +62,16 @@ export const generateQuote = async (preferTags:Array<string> = []) => {
 	// example: tags=history|civil-rights
 
 	// generate quote
-	const data = await fetch('https://api.quotable.io/random?maxLength=200' + tagsParam)
-		.then((response) => response.json())
-		.catch((error) => {
-			console.log(`Error: ${error}`);
-		});
+	// const data = await fetch('https://api.quotable.io/random?maxLength=200' + tagsParam)
+	// 	.then((response) => response.json())
+	// 	.catch((error) => {
+	// 		console.log(`Error: ${error}`);
+	// 	});
+	const response = await fetch('/api/quotes')
+	const data = await response.json()
 
 	// reset bookmark for new quote
 	bookmark.set(false);
 
-	quote.set(data.content);
+	quote.set(data[0].q);
 };

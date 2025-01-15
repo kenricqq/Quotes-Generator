@@ -1,13 +1,46 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { addQuote, deleteQuote } from '../../stores/quoteStore.ts';
-	import { Bookmark, RefreshCcw, Settings } from 'lucide-svelte';
-	import { bookmark, quote, generateQuote } from '../../stores/quoteStore.ts';
-	import Modal from './Modal.svelte';
+	import { onMount } from 'svelte'
+	import { addQuote, deleteQuote } from '../../stores/quoteStore.ts'
+	import { Bookmark, RefreshCcw, Settings } from 'lucide-svelte'
+	import { bookmark, quote, generateQuote } from '../../stores/quoteStore.ts'
+	import Modal from './Modal.svelte'
 
-	let showModal = false;
+	let showModal = false
 
-	let tags: Record<string, boolean>;
+	// let tag = ''
+
+	// let tags = [
+	// 	'Anxiety',
+	// 	'Change',
+	// 	'Choice',
+	// 	'Confidence',
+	// 	'Courage',
+	// 	'Death',
+	// 	'Dreams',
+	// 	'Excellence',
+	// 	'Failure',
+	// 	'Fairness',
+	// 	'Fear',
+	// 	'Forgiveness',
+	// 	'Freedom',
+	// 	'Future',
+	// 	'Happiness',
+	// 	'Inspiration',
+	// 	'Kindness',
+	// 	'Leadership',
+	// 	'Life',
+	// 	'Living',
+	// 	'Love',
+	// 	'Pain',
+	// 	'Past',
+	// 	'Success',
+	// 	'Time',
+	// 	'Today',
+	// 	'Truth',
+	// 	'Work',
+	// ]
+
+	let tags: Record<string, boolean>
 
 	const initTags = () => {
 		tags = {
@@ -76,56 +109,56 @@
 			Weakness: false,
 			Wellness: false,
 			Wisdom: false,
-			Work: false
-		};
-	};
+			Work: false,
+		}
+	}
 
-	initTags();
+	initTags()
 
 	onMount(() => {
-		const preferTags = localStorage.getItem('preferTags');
+		const preferTags = localStorage.getItem('preferTags')
 		if (preferTags) {
 			Object.keys(tags).forEach((key) => {
 				if (preferTags.includes(key)) {
-					tags[key] = true;
+					tags[key] = true
 				}
-			});
+			})
 		}
-		getQuote();
-	});
+		getQuote()
+	})
 
 	let toggleTag = (tag: string) => {
-		tags[tag] = !tags[tag];
+		tags[tag] = !tags[tag]
 
 		// filters out to only tags that are true, save to localStorage
-		const preferTags = Object.keys(tags).filter((key) => tags[key] == true);
-		localStorage.setItem('preferTags', JSON.stringify(preferTags));
-	};
+		const preferTags = Object.keys(tags).filter((key) => tags[key] == true)
+		localStorage.setItem('preferTags', JSON.stringify(preferTags))
+	}
 
 	const resetTags = () => {
-		initTags();
-		localStorage.removeItem('preferTags');
-	};
+		initTags()
+		localStorage.removeItem('preferTags')
+	}
 
 	const getQuote = () => {
-		const preferTags = localStorage.getItem('preferTags');
-		const preferTagsArr = preferTags ? JSON.parse(preferTags) : [];
+		const preferTags = localStorage.getItem('preferTags')
+		const preferTagsArr = preferTags ? JSON.parse(preferTags) : []
 
 		if (preferTags) {
-			generateQuote(preferTagsArr);
+			generateQuote(preferTagsArr)
 		} else {
-			generateQuote();
+			generateQuote()
 		}
-	};
+	}
 
 	// toggleBookmark via Bookmark icon
 	const toggleBookmark = () => {
 		if ($bookmark) {
-			deleteQuote($quote);
+			deleteQuote($quote)
 		} else {
-			addQuote($quote);
+			addQuote($quote)
 		}
-	};
+	}
 </script>
 
 <Modal bind:showModal>
@@ -135,7 +168,7 @@
 				? 'variant-filled'
 				: 'bg-slate-700'}"
 			on:click={() => {
-				toggleTag(tag);
+				toggleTag(tag)
 			}}
 			on:keypress
 		>
@@ -144,12 +177,16 @@
 		</button>
 	{/each}
 
-	<button slot="reset" on:click={() => resetTags()} class="bg-slate-100 p-3 my-2 mx-1 rounded-lg"
-		>Reset</button
+	<button
+		slot="reset"
+		on:click={() => resetTags()}
+		class="bg-slate-100 p-3 my-2 mx-1 rounded-lg">Reset</button
 	>
 </Modal>
 
-<div class="flex h-fit min-h-[13rem] justify-between m-5 sm:m-10 rounded-lg bg-slate-800">
+<div
+	class="flex h-fit min-h-[13rem] justify-between m-5 sm:m-10 rounded-lg bg-slate-800"
+>
 	<h1 class="p-9 pr-1 m-auto text-center text-xl sm:text-2xl">{$quote}</h1>
 
 	<section class="m-6 flex flex-col justify-between">
@@ -157,9 +194,9 @@
 			<RefreshCcw />
 		</button>
 
-		<button on:click={() => (showModal = true)}>
+		<!-- <button on:click={() => (showModal = true)}>
 			<Settings />
-		</button>
+		</button> -->
 
 		<button on:click={() => toggleBookmark()}>
 			<Bookmark class={`${$bookmark ? 'fill-current' : 'fill-none'}`} />
